@@ -1018,6 +1018,152 @@ body>*{position:relative;z-index:1}
 <!-- FLOATING CALL -->
 <a href="tel:+37067511791" class="float-call" title="Skambinti">☎</a>
 
+<!-- 🎉 FUN POPUP FOR KAROLINA — REMOVE BEFORE REAL DEPLOY -->
+<div class="fun-popup" id="funPopup">
+  <div class="fun-popup-bg" onclick="document.getElementById('funPopup').classList.add('bye')"></div>
+  <div class="fun-popup-card">
+    <div class="fun-popup-confetti" id="confetti"></div>
+    <div class="fun-popup-emoji">💈✂️🔥</div>
+    <div class="fun-popup-title">Labas, Karolina!</div>
+    <div class="fun-popup-text">
+      Jeigu tinka — galim įkelt svetainę ir greičiau,<br>
+      nes man reik apsikirpti 😄💇‍♂️
+    </div>
+    <div class="fun-popup-scissors">✂️</div>
+    <button class="fun-popup-btn" onclick="document.getElementById('funPopup').classList.add('bye')">
+      Sutinku! Įkeliam! 🚀
+    </button>
+    <div class="fun-popup-small">P.S. Svetainė jau veikia 👆</div>
+  </div>
+</div>
+<style>
+.fun-popup{
+  position:fixed;inset:0;z-index:99999;
+  display:flex;align-items:center;justify-content:center;
+  animation:popup-in .5s ease;
+}
+.fun-popup.bye{animation:popup-out .6s ease forwards}
+@keyframes popup-in{from{opacity:0}to{opacity:1}}
+@keyframes popup-out{to{opacity:0;visibility:hidden;pointer-events:none}}
+
+.fun-popup-bg{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(10px);
+}
+
+.fun-popup-card{
+  position:relative;z-index:2;
+  background:var(--gray);border:2px solid var(--gold);
+  border-radius:20px;padding:40px 36px;
+  max-width:420px;width:90%;text-align:center;
+  animation:card-bounce .8s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 0 60px rgba(200,168,78,.3),0 0 120px rgba(200,168,78,.1);
+  overflow:hidden;
+}
+@keyframes card-bounce{
+  0%{transform:scale(0) rotate(-10deg);opacity:0}
+  50%{transform:scale(1.05) rotate(2deg)}
+  100%{transform:scale(1) rotate(0)}
+}
+
+.fun-popup-emoji{
+  font-size:48px;margin-bottom:16px;
+  animation:emoji-bounce 1s ease infinite;
+}
+@keyframes emoji-bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.fun-popup-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:42px;color:var(--gold);letter-spacing:3px;
+  margin-bottom:16px;
+  animation:title-glow 2s ease-in-out infinite alternate;
+}
+@keyframes title-glow{
+  from{text-shadow:0 0 10px rgba(200,168,78,.3)}
+  to{text-shadow:0 0 30px rgba(200,168,78,.6),0 0 60px rgba(200,168,78,.2)}
+}
+
+.fun-popup-text{
+  font-size:16px;color:#ccc;line-height:1.8;
+  margin-bottom:20px;
+}
+
+.fun-popup-scissors{
+  font-size:60px;
+  animation:scissors-cut 1.5s ease-in-out infinite;
+  display:inline-block;
+}
+@keyframes scissors-cut{
+  0%,100%{transform:rotate(0deg) scale(1)}
+  25%{transform:rotate(-20deg) scale(1.2)}
+  50%{transform:rotate(20deg) scale(1)}
+  75%{transform:rotate(-10deg) scale(1.1)}
+}
+
+.fun-popup-btn{
+  display:block;width:100%;margin-top:20px;
+  background:var(--gold);color:var(--black);
+  border:none;border-radius:10px;
+  padding:16px;font-size:18px;font-weight:800;
+  font-family:'Inter',sans-serif;
+  text-transform:uppercase;letter-spacing:2px;
+  cursor:pointer;
+  animation:btn-shake 3s ease-in-out infinite;
+  transition:all .3s;
+}
+.fun-popup-btn:hover{
+  background:var(--gold-light);
+  transform:scale(1.05);
+  box-shadow:0 0 30px rgba(200,168,78,.5);
+}
+@keyframes btn-shake{
+  0%,90%,100%{transform:translateX(0)}
+  92%{transform:translateX(-4px)}
+  94%{transform:translateX(4px)}
+  96%{transform:translateX(-4px)}
+  98%{transform:translateX(4px)}
+}
+
+.fun-popup-small{
+  margin-top:14px;font-size:12px;color:#666;
+  animation:fade-pulse 2s ease-in-out infinite alternate;
+}
+@keyframes fade-pulse{from{opacity:.4}to{opacity:1}}
+
+/* Confetti particles */
+.fun-popup-confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti-piece{
+  position:absolute;width:10px;height:10px;
+  top:-10px;border-radius:2px;
+  animation:confetti-fall linear infinite;
+}
+@keyframes confetti-fall{
+  0%{transform:translateY(-10px) rotate(0deg);opacity:1}
+  100%{transform:translateY(500px) rotate(720deg);opacity:0}
+}
+</style>
+<script>
+/* Generate confetti */
+(()=>{
+  const c=document.getElementById('confetti');
+  const colors=['#c8a84e','#e8cc6a','#fff','#ff6b6b','#4ecdc4','#ffe66d','#ff8a5c'];
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');
+    p.className='confetti-piece';
+    p.style.left=Math.random()*100+'%';
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDuration=(2+Math.random()*3)+'s';
+    p.style.animationDelay=(Math.random()*2)+'s';
+    p.style.width=(6+Math.random()*8)+'px';
+    p.style.height=(6+Math.random()*8)+'px';
+    c.appendChild(p);
+  }
+})();
+</script>
+
 <script>
 /* Nav scroll + sticky bar */
 window.addEventListener('scroll',()=>{
